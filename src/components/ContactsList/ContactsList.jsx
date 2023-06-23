@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
+import { ContactsListItem } from './ContactListItem';
+
 export class ContactsList extends Component {
   render() {
     return (
       <>
-        <h2>Contacts</h2>
-        <label>
-          Find contacts by name
-          <input
-            type="text"
-            value={this.props.filter}
-            name="filter"
-            onChange={this.props.onFilterChange}
-          />
-        </label>
         <ul>
-          {this.props.contacts.map(contact => {
-            return (
-              <li key={contact.id}>
-                {contact.name}: {contact.number}
-              </li>
-            );
-          })}
+          {this.props.contacts.map(contact => (
+            <ContactsListItem
+              key={contact.id}
+              contact={contact}
+              onDeleteButton={this.props.onDeleteButton}
+            />
+          ))}
         </ul>
       </>
     );
