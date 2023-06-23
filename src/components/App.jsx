@@ -7,22 +7,26 @@ export class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
-  updateNameState = event => {
+  updateInputState = event => {
     this.setState({
-      name: event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
   addContact = event => {
     event.preventDefault();
     const name = event.target.elements.name.value;
-    let contact = { name: name, id: nanoid(4) };
+    const number = event.target.elements.number.value;
+
+    let contact = { name: name, number: number, id: nanoid(4) };
 
     this.setState(
       prevState => ({
         contacts: [...prevState.contacts, contact],
         name: '',
+        number: '',
       }),
       () => {
         console.log(this.state);
@@ -36,8 +40,10 @@ export class App extends Component {
         <h2>Phonebook</h2>
         <AddContactForm
           onAddContact={this.addContact}
-          onChange={this.updateNameState}
+          onNameChange={this.updateInputState}
+          onNumberChange={this.updateInputState}
           name={this.state.name}
+          number={this.state.number}
         />
         <ContactsList contacts={this.state.contacts} />
       </>

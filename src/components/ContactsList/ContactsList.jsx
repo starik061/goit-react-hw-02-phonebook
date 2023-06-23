@@ -7,7 +7,11 @@ export class ContactsList extends Component {
         <h2>Contacts</h2>
         <ul>
           {this.props.contacts.map(contact => {
-            return <li key={contact.id}>{contact.name}</li>;
+            return (
+              <li key={contact.id}>
+                {contact.name}: {contact.number}
+              </li>
+            );
           })}
         </ul>
       </>
