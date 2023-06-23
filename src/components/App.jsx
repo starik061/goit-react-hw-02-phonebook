@@ -12,45 +12,22 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
-  };
-  updateInputState = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
   };
 
-  addContact = event => {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    const number = event.target.elements.number.value;
+  addContact = formState => {
+    const { name, number } = formState;
+    const contact = { name: name, number: number, id: nanoid(4) };
 
-    let contact = { name: name, number: number, id: nanoid(4) };
-
-    this.setState(
-      prevState => ({
-        contacts: [...prevState.contacts, contact],
-        name: '',
-        number: '',
-      }),
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, contact],
+    }));
   };
 
   render() {
     return (
       <>
         <h2>Phonebook</h2>
-        <AddContactForm
-          onAddContact={this.addContact}
-          onNameChange={this.updateInputState}
-          onNumberChange={this.updateInputState}
-          name={this.state.name}
-          number={this.state.number}
-        />
+        <AddContactForm onAddContact={this.addContact} />
         <ContactsList
           contacts={this.state.contacts}
           onFilterChange={this.updateInputState}
