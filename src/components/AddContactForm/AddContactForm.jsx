@@ -7,6 +7,7 @@ export class AddContactForm extends Component {
         <label>
           Name
           <input
+            onChange={this.props.onChange}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
