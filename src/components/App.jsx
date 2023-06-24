@@ -20,7 +20,7 @@ export class App extends Component {
     const contact = { name: name, number: number, id: nanoid(4) };
 
     let isNameInContacts = this.state.contacts.find(
-      contact => contact.name === name
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
     if (isNameInContacts) {
       alert('Такое имя уже существует в контактах');
